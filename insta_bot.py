@@ -7,8 +7,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 import time
 
-USERNAME = "your_dummy_username"
-PASSWORD = "your_dummy_password"
+USERNAME = "krishramoju"
+PASSWORD = "Krish@123"
 TARGET_USER = "cbitosc"
 
 def login(driver, username, password):
@@ -35,7 +35,7 @@ def follow_if_not_following(driver):
         button.click()
         print("Followed the account.")
     except:
-        print("Already following.")
+        print("Already following or button not found.")
 
 def extract_info(driver):
     try:
@@ -43,7 +43,6 @@ def extract_info(driver):
             EC.presence_of_all_elements_located((By.XPATH, "//ul/li"))
         )
         stats = driver.find_elements(By.XPATH, "//ul/li")
-
         try:
             bio = driver.find_element(By.XPATH, "//section//div[contains(@class, '_aacl')]").text
         except:
@@ -58,7 +57,7 @@ def extract_info(driver):
 
         return bio, followers, following
     except Exception as e:
-        print("Error extracting profile info:", e)
+        print("Error extracting info:", e)
         return "N/A", "N/A", "N/A"
 
 def save_to_file(bio, followers, following):
@@ -73,7 +72,8 @@ def main():
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")
 
-    driver = webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options)
+    # ✅ Correct constructor
+    driver = webdriver.Chrome(service=webdriver.chrome.service.Service(ChromeDriverManager().install()), options=chrome_options)
 
     try:
         login(driver, USERNAME, PASSWORD)
