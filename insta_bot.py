@@ -4,8 +4,8 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 import time
 
-USERNAME = "your_dummy_username"
-PASSWORD = "your_dummy_password"
+USERNAME ="krishramoju"
+PASSWORD = "Krish@123"
 TARGET_USER = "cbitosc"
 
 def login(driver, username, password):
